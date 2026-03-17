@@ -12,6 +12,5 @@ exports.createVideo = async (topic, audioPath) => {
    .save(output)
    .on("end", () => resolve(output))
    .on("error", reject);
-
  });
 };
