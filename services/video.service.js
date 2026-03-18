@@ -15,7 +15,11 @@ exports.createVideo = async (videoPath, audioPath) => {
     ffmpeg()
       .input(videoPath)
       .input(audioPath)
-      .outputOptions(["-c:v copy", "-c:a aac", "-shortest"])
+      .outputOptions([
+        "-c:v libx264",
+        "-c:a aac",
+        "-shortest", // 🔥 KEY LINE
+      ])
       .save(outputPath)
       .on("end", () => {
         console.log("Video created:", outputPath);
