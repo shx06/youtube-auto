@@ -2,8 +2,7 @@ const ffmpeg = require("fluent-ffmpeg");
 const fs = require("fs");
 const path = require("path");
 
-exports.createVideo = async (topic, audioPath) => {
-
+exports.createVideo = async (videoPath, audioPath) => {
   const outputDir = path.join(__dirname, "../storage/videos");
   const outputPath = path.join(outputDir, "video.mp4");
 
@@ -14,9 +13,9 @@ exports.createVideo = async (topic, audioPath) => {
 
   return new Promise((resolve, reject) => {
     ffmpeg()
-      .input("storage/clips/clip.mp4")
-      // .input(audioPath) // ✅ correct variable
-      .outputOptions("-c:v copy")
+      .input(videoPath)
+      .input(audioPath)
+      .outputOptions(["-c:v copy", "-c:a aac", "-shortest"])
       .save(outputPath)
       .on("end", () => {
         console.log("Video created:", outputPath);
