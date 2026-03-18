@@ -104,3 +104,79 @@ Start with:
 NOTE
 ----------------------------------------
 Tomorrow: Say "continue from viral system"
+
+----------------------------------------
+VIRAL SYSTEM V1 (MARCH 18, 2026)
+----------------------------------------
+Implemented:
+1. Structured content generation (title, description, narration, keywords)
+2. Multi-clip fetch from Pexels (3 clips)
+3. Audio-synced clip stitching (total video duration follows voice length)
+4. Auto subtitle generation (SRT) and burn-in during render
+5. Upload metadata now uses generated title and description
+
+Current new output:
+- More dynamic visuals per video
+- Better pacing to narration length
+- On-screen subtitles for retention
+
+Next upgrades:
+1. Hook optimizer (first 2 seconds)
+2. BGM mixing with ducking
+3. Caption styling themes (font, color, placement)
+4. Scene-by-scene keyword-based clip matching
+
+----------------------------------------
+VIRAL SYSTEM V2 (MARCH 18, 2026)
+----------------------------------------
+Implemented:
+1. Scene-by-scene clip selection (3 scene queries from AI)
+2. Subtitle styling control (font, size, outline, vertical placement)
+3. Optional BGM auto-pick from storage/audio/bgm
+4. BGM ducking via sidechain compression under narration voice
+
+Operational note:
+- Place .mp3/.wav/.m4a tracks in storage/audio/bgm to enable BGM.
+- If folder is empty, pipeline continues without background music.
+
+----------------------------------------
+QUALITY + VOICE STABILIZATION V3 (MARCH 19, 2026)
+----------------------------------------
+Implemented today:
+1. Video continuity fix:
+  - Replaced freeze-frame extension with stream looping per clip.
+  - Result: no visual "pause" while audio continues.
+
+2. Dynamic visual pacing:
+  - Clip count now auto-scales from narration length.
+  - Current range: 6 to 18 clips per video.
+
+3. Better visual quality baseline:
+  - Better Pexels file selection (higher resolution/fps preference).
+  - Stronger render settings (x264 slow preset, CRF 18, high profile, higher audio bitrate).
+  - Light grading + sharpen in FFmpeg pipeline.
+
+4. Better voice reliability and naturalness:
+  - Polly SSML prosody enabled.
+  - Multi-step fallback path (SSML/plain + neural/standard).
+  - Default engine moved to standard for consistent regional support.
+  - Voice mastering pass added (compression + loudness normalization).
+
+5. Stable end-to-end run confirmed:
+  - Topic -> Script -> Voice -> Multi-clip video -> Subtitles -> Upload.
+  - Latest successful upload IDs observed in logs.
+
+Current stable behavior:
+- Videos render fully without frozen visuals.
+- Subtitle burn-in working.
+- Upload flow working automatically.
+- If BGM folder is empty, pipeline skips BGM gracefully.
+
+Next recommended upgrades:
+1. Hook optimizer (first 2 seconds): stronger opening line + faster first cuts.
+2. Subtitle style themes (color presets, dynamic placement by scene brightness).
+3. Human voice profile presets (calm, energetic, storyteller) using different Polly voices/prosody.
+4. Add optional 16:9 export mode for long-form videos (avoid Shorts-only positioning).
+
+Resume command tomorrow:
+Say: "continue from V3 checkpoint"

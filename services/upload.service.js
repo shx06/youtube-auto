@@ -1,7 +1,7 @@
 const { google } = require("googleapis");
 const fs = require("fs");
 
-exports.upload = async (videoPath, title) => {
+exports.upload = async (videoPath, title, description) => {
   const oauth2Client = new google.auth.OAuth2(
     process.env.YOUTUBE_CLIENT_ID,
     process.env.YOUTUBE_CLIENT_SECRET,
@@ -20,8 +20,8 @@ exports.upload = async (videoPath, title) => {
     part: "snippet,status",
     requestBody: {
       snippet: {
-        title,
-        description: "AI generated video",
+        title: title || "AI Generated Short",
+        description: description || "AI generated video",
         tags: ["AI", "motivation", "facts"],
       },
       status: {

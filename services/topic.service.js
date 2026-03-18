@@ -7,7 +7,6 @@ const topics = [
   "discipline",
 ];
 
-const topic = topics[Math.floor(Math.random() * topics.length)];
 exports.getTopic = async () => {
-  return topic;
+  return topics[Math.floor(Math.random() * topics.length)];
 };
